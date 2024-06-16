@@ -100,7 +100,7 @@ const Page = () => {
 
             <div className="flex flex-col md:flex-row items-start">
                 <div className="md:w-[20%] sm:block hidden">
-                    <Image src='/assests/book.JPG' alt="Book" width={200} height={200} className=" lg:fixed   object-cover mb-4 rounded-xl" />
+                    <Image src='/assests/book.png' alt="Book" width={200} height={200} className=" lg:fixed   object-cover mb-4 rounded-xl" />
                 </div>
                 <div className="md:w-3/4 p-4">
                     <p className="text-gray-400 text-base mb-6 justify-start text-left text-lg novel-paragraph">

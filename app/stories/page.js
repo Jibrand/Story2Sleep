@@ -73,7 +73,7 @@ export default function Home() {
             <div className="carousel-item" key={index}>
               <div className="card w-72 bg-base-100 shadow-xl">
                 <figure className="px-10 pt-4">
-                  <Image src='/assests/book.JPG' className='rounded-xl' alt="emoji" height={152} width={152} />
+                  <Image src='/assests/book.png' className='rounded-xl' alt="book" height={152} width={152} />
                 </figure>
                 <div className="card-body items-center text-center">
                   <h2 className="card-title">{book.title}</h2>
