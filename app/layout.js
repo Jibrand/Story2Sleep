@@ -10,12 +10,12 @@ export const metadata = {
   author: "Story2Sleep Team",
   openGraph: {
     type: "website",
-    url: "https://www.story2sleep.com/",
+    url: "https://story2sleep.vercel.app/",
     title: "Story2Sleep - Audio Bedtime Stories for All Ages",
     description: "Discover a world of enchanting bedtime stories with Story2Sleep. Listen to audio stories from various categories designed to help you and your children relax and fall asleep peacefully.",
     images: [
       {
-        url: "https://www.story2sleep.com/images/og-image.jpg",
+        url: "https://story2sleep.vercel.app/",
         width: 800,
         height: 600,
         alt: "Story2Sleep - Bedtime Stories",
@@ -24,10 +24,10 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    url: "https://www.story2sleep.com/",
+    url: "https://story2sleep.vercel.app/",
     title: "Story2Sleep - Audio Bedtime Stories for All Ages",
     description: "Discover a world of enchanting bedtime stories with Story2Sleep. Listen to audio stories from various categories designed to help you and your children relax and fall asleep peacefully.",
-    image: "https://www.story2sleep.com/images/twitter-image.jpg",
+    image: "https://story2sleep.vercel.app/",
   },
   robots: {
     index: true,
