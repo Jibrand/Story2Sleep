@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import Head from "next/head";
 
 export default function Home() {
 
@@ -29,10 +28,6 @@ export default function Home() {
 
   return (
     <>
-        <Head>
-        <title>My page title</title>
-      </Head>
-
       <div className="container mx-auto text-center">
         <div className="bg-gray-800 flex items-center p-3 rounded-2xl shadow-lg max-w-2xl mx-auto">
           <span className="mr-4">

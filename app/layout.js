@@ -34,7 +34,7 @@ export const metadata = {
     follow: true,
   },
   icons: {
-    icon: "/favicon.ico",
+    icon: "/next.svg",
   },
   charset: "UTF-8",
   viewport: "width=device-width, initial-scale=1.0",
