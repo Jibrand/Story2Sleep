@@ -43,7 +43,7 @@ export default function Home() {
 
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:px-16 ">
           {categories.map((category, index) => (
-            <Link href='/stories' className="sm:mx-5 btn  btn-outline btn-md sm:btn-sm md:btn-md lg:btn-lg btn-success"> <span className='text-lg'>{category.emoji}</span>    {category.name}</Link>
+            <Link href='/stories' key={index} className="sm:mx-5 btn  btn-outline btn-md sm:btn-sm md:btn-md lg:btn-lg btn-success"> <span className='text-lg'>{category.emoji}</span>    {category.name}</Link>
           ))}
         </div>
 
