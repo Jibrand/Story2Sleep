@@ -1,7 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import JibranImage from '../public/assests/jibran.png'
-import Emoji from '../public/assests/book_emoji_reading.svg'
 
 export default function Home() {
 
@@ -33,7 +31,7 @@ export default function Home() {
       <div className="container mx-auto text-center">
         <div className="bg-gray-800 flex items-center p-3 rounded-2xl shadow-lg max-w-2xl mx-auto">
           <span className="mr-4">
-            <Image src={Emoji} className='h-8 w-8' alt="emoji" width={32} height={32} />
+            <Image src='/assests/book_emoji_reading.svg'  className='h-8 w-8' alt="emoji" width={32} height={32} />
           </span>
           <p className="font-bold text-3xl text-center flex-grow">Story2Sleep</p>
 
@@ -51,7 +49,7 @@ export default function Home() {
 
         <footer className="p-4 mt-8 mb-10">
                 <div className="flex items-center justify-center">
-                    <p className="text-gray-400 mr-2">Made with</p> <span className="text-gray-700 text-xl mr-2"> <Image src={Emoji} className="h-6 w-6 rounded-full" alt="emoji" width={24} height={24} /> </span> <p className="text-gray-400 mr-2">by</p> <a href="https://www.linkedin.com/in/muhammad-jibran220/" target='_blank' rel='noopener noreferrer' className="text-green-400 font-bold underline mr-2">Jibran</a> <Image src={JibranImage} className="h-8 w-8 rounded-full" alt="Jibran" width={32} height={32} />
+                    <p className="text-gray-400 mr-2">Made with</p> <span className="text-gray-700 text-xl mr-2"> <Image src='/assests/book_emoji_reading.svg' className="h-6 w-6 rounded-full" alt="emoji" width={24} height={24} /> </span> <p className="text-gray-400 mr-2">by</p> <a href="https://www.linkedin.com/in/muhammad-jibran220/" target='_blank' rel='noopener noreferrer' className="text-green-400 font-bold underline mr-2">Jibran</a> <Image src='/assests/jibran.png' className="h-8 w-8 rounded-full" alt="Jibran" width={32} height={32} />
                 </div>
             </footer>
 
