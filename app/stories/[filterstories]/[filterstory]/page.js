@@ -1,17 +1,37 @@
 'use client'
 
 import Image from "next/image";
-import JibranImage from '../../public/assests/jibran.png';
 import { useState, useRef, useEffect } from 'react';
 import { FaBackward, FaForward, FaPlay, FaPause } from 'react-icons/fa';
 
-const Page = () => {
+const Page = (props) => {
     const [isPlaying, setIsPlaying] = useState(false);
     const [currentTime, setCurrentTime] = useState(0);
     const [duration, setDuration] = useState(0);
     const audioRef = useRef(null);
-    const [selectedLanguage, setSelectedLanguage] = useState('en-US'); 
-    const [selectedSpeaker, setSelectedSpeaker] = useState('default');  
+    const [selectedLanguage, setSelectedLanguage] = useState('en-US');
+    const [selectedSpeaker, setSelectedSpeaker] = useState('default');
+    const [Book, setBook] = useState([])
+    const [Loading, setLoading] = useState(true)
+
+
+    useEffect(() => {
+        getBooks(props.params.filterstory)
+    }, [])
+
+    const getBooks = async (id) => {
+        let data = await fetch(`http://localhost:3000/api/Books/${props.params.filterstories}/${id}`);
+        data = await data.json();
+
+        if (data.success) {
+            setBook(data.result)
+            setLoading(false);
+        }
+        else {
+            return { success: false }
+            setLoading(false);
+        }
+    }
 
     const handlePlayPause = () => {
         const audio = audioRef.current;
@@ -76,9 +96,11 @@ const Page = () => {
         <div className="container mx-auto text-center p-4">
             <div className="bg-gray-800 flex items-center p-3 rounded-2xl shadow-lg max-w-2xl mx-auto mb-8">
                 <span className="mr-4 sm:block hidden">
-                    <Image src='/assests/book_emoji_reading.svg'  className='h-8 w-8' alt="emoji" width={32} height={32} />
+                    <Image src='/assests/book_emoji_reading.svg' className='h-8 w-8' alt="emoji" width={32} height={32} />
                 </span>
-                <p className="font-bold text-3xl text-center flex-grow">A magical tale of mythical creatures and ancient spell</p>
+                {Book.map((book, index) => (
+                    <p className="font-bold text-3xl text-center flex-grow">{book.Title}</p>
+                ))}
             </div>
 
             {/* <div className="flex items-center justify-center gap-4 mb-4">
@@ -97,21 +119,27 @@ const Page = () => {
                     <option>Jhon</option>
                 </select>
             </div> */}
+            {Loading ? (
+                <span className="loading loading-ring loading-lg mt-24"></span>
+            ) : (
+                Book.map((book, index) => (
 
-            <div className="flex flex-col md:flex-row items-start">
-                <div className="md:w-[20%] sm:block hidden">
-                    <Image src='/assests/book.png' alt="Book" width={200} height={200} className=" lg:fixed   object-cover mb-4 rounded-xl" />
-                </div>
-                <div className="md:w-3/4 p-4">
-                    <p className="text-gray-400 text-base mb-6 justify-start text-left text-lg novel-paragraph">
-                        Once upon a time, in a land far, far away, there lived mythical creatures in harmony with nature. Ancient spells protected the land, and magic was a part of everyday life. Join us on this magical journey and experience the wonders of this enchanted world.
-                    </p>
-                  </div>
-            </div>
+                    <div className="flex flex-col md:flex-row items-start">
+                        <div className="md:w-[20%] sm:block hidden">
+                            <Image src={book.Image} alt="Book" width={200} height={200} className=" lg:fixed   object-cover mb-4 rounded-xl" />
+                        </div>
+                        <div className="md:w-3/4 p-4">
+                            <p className="text-gray-400 text-base mb-6 justify-start text-left text-lg novel-paragraph">
+                                {book.Story}
+                            </p>
+                        </div>
+                    </div>
+                ))
+            )}
 
             <footer className="p-4 mt-8 mb-10">
                 <div className="flex items-center justify-center">
-                    <p className="text-gray-400 mr-2">Made with</p> <span className="text-gray-700 text-xl mr-2"> <Image src='/assests/book_emoji_reading.svg'  className="h-6 w-6 rounded-full" alt="emoji" width={24} height={24} /> </span> <p className="text-gray-400 mr-2">by</p> <a href="https://www.linkedin.com/in/muhammad-jibran220/" target='_blank' rel='noopener noreferrer' className="text-green-400 font-bold underline mr-2">Jibran</a> <Image src='/assests/jibran.png' className="h-8 w-8 rounded-full" alt="Jibran" width={32} height={32} />
+                    <p className="text-gray-400 mr-2">Made with</p> <span className="text-gray-700 text-xl mr-2"> <Image src='/assests/book_emoji_reading.svg' className="h-6 w-6 rounded-full" alt="emoji" width={24} height={24} /> </span> <p className="text-gray-400 mr-2">by</p> <a href="https://www.linkedin.com/in/muhammad-jibran220/" target='_blank' rel='noopener noreferrer' className="text-green-400 font-bold underline mr-2">Jibran</a> <Image src='/assests/jibran.png' className="h-8 w-8 rounded-full" alt="Jibran" width={32} height={32} />
                 </div>
             </footer>
 
