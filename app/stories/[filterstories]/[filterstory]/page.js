@@ -18,7 +18,7 @@ const Page = (props) => {
     }, []);
 
     const getBooks = async (id) => {
-        let data = await fetch(`http://localhost:3000/api/Books/${props.params.filterstories}/${id}`);
+        let data = await fetch(`https://story2sleep.vercel.app/api/Books/${props.params.filterstories}/${id}`);
         data = await data.json();
         if (data.success) {
             setBook(data.result);

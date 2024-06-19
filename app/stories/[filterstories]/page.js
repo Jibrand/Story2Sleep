@@ -14,7 +14,7 @@ export default function Home(props) {
     }, [])
 
     const getBooks = async (category) => {
-        let data = await fetch(`http://localhost:3000/api/Books/${category}`);
+        let data = await fetch(`https://story2sleep.vercel.app/api/Books/${category}`);
         data = await data.json();
 
         if (data.success) {
