@@ -24,20 +24,6 @@ p {
   padding-right: 0.1em;
 }
 
-#nprogress .bar {
-  background: #29d;
-}
-
-/* Customize the spinner */
-#nprogress .spinner-icon {
-  border-top-color: #29d;
-  border-left-color: #29d;
-}
-
-/* Optional: Adjust the z-index to ensure it appears above other elements */
-#nprogress {
-  z-index: 9999 !important;
-}
 
 @tailwind base;
 @tailwind components;

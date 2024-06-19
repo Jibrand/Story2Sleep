@@ -18,7 +18,7 @@ const Page = (props) => {
     }, []);
 
     const getBooks = async (id) => {
-        let data = await fetch(`https://story2sleep.vercel.app/api/Books/${props.params.filterstories}/${id}`);
+        let data = await fetch(`http://localhost:3000/api/Books/${props.params.filterstories}/${id}`);
         data = await data.json();
         if (data.success) {
             setBook(data.result);
@@ -80,6 +80,10 @@ const Page = (props) => {
         };
     }, [isPlaying]); // Dependency array ensures the event listener is added/removed appropriately
 
+    const formatStoryWithLineBreaks = (story) => {
+        return story.replace(/<\/p>/g, '</p><br />');
+    }
+
     return (
         <div className="container mx-auto text-center p-4">
             <div className="bg-gray-800 flex items-center p-3 rounded-2xl shadow-lg max-w-2xl mx-auto mb-8">
@@ -99,9 +103,8 @@ const Page = (props) => {
                             <Image src={book.Image} alt="Book" width={200} height={200} className="lg:fixed object-cover mb-4 rounded-xl" />
                         </div>
                         <div className="md:w-3/4 p-4">
-                            <p className="text-gray-400   mb-6 justify-start text-left text-lg novel-paragraph">
-                                {book.Story}
-                            </p>
+                        <div className="text-gray-400   mb-6 justify-start text-left text-lg" dangerouslySetInnerHTML={{ __html:   formatStoryWithLineBreaks(book.Story) }} />
+
                         </div>
                     </div>
                 ))

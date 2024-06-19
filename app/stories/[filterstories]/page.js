@@ -5,26 +5,41 @@ import Link from "next/link";
 
 export default function Home(props) {
 
-    const [Books, setBooks] = useState([])
-    const [Loading, setLoading] = useState(true)
+    const [Books, setBooks] = useState([]);
+    const [Loading, setLoading] = useState(true);
 
     useEffect(() => {
         console.log(props.params.filterstories);
-        getBooks(props.params.filterstories)
-    }, [])
+        getBooks(props.params.filterstories);
+    }, []);
 
     const getBooks = async (category) => {
-        let data = await fetch(`https://story2sleep.vercel.app/api/Books/${category}`);
+        let data = await fetch(`http://localhost:3000/api/Books/${category}`);
         data = await data.json();
 
         if (data.success) {
-            setBooks(data.result)
+            setBooks(data.result);
             setLoading(false);
         }
         else {
             setLoading(false);
-            return { success: false }
+            return { success: false };
         }
+    }
+
+    const formatDescription = (desc) => {
+        if (desc.length <= 50) return desc;
+
+        const truncated = desc.slice(0, 47);
+        return (
+            <>
+                {truncated}
+                <span className="text-gray-600">{desc[47]}</span>
+                <span className="text-gray-700">{desc[48]}</span>
+                <span className="text-gray-800">{desc[49]}</span>
+                ...
+            </>
+        );
     }
 
     return (
@@ -37,20 +52,20 @@ export default function Home(props) {
 
                 <br />
 
-                    {Loading ? (
-                        <span className="loading loading-ring loading-lg mt-24"></span>
-                    ) : (
-                <div className="carousel carousel-center sm:max-w-4xl max-w-xs p-2  space-x-2 bg-neutral rounded-box">
+                {Loading ? (
+                    <span className="loading loading-ring loading-lg mt-24"></span>
+                ) : (
+                    <div className="carousel carousel-center sm:max-w-4xl max-w-xs p-2 space-x-2 bg-neutral rounded-box">
                         {
                             Books.map((book, index) => (
                                 <div className="carousel-item" key={index}>
                                     <div className="card w-72 bg-base-100 shadow-xl">
                                         <figure className="px-10 pt-4">
-                                            <Image src={book.Image} className='rounded-xl  ' alt="book" height={152} width={152} />
+                                            <Image src={book.Image} className='rounded-xl' alt="book" height={152} width={152} />
                                         </figure>
                                         <div className="card-body items-center text-center">
                                             <h2 className="card-title">{book.Title}</h2>
-                                            <p>{book.Category}</p>
+                                            <p className="text-gray-500">{formatDescription(book.smallDesc)}</p>
                                             <div className="card-actions">
                                                 <Link href={`/stories/${props.params.filterstories}/${book._id}`} className="btn btn-success">Listen</Link>
                                             </div>
@@ -59,10 +74,8 @@ export default function Home(props) {
                                 </div>
                             ))
                         }
-                </div>
-                    )}
-
-
+                    </div>
+                )}
 
                 <footer className="p-4 mt-8 mb-10">
                     <div className="flex items-center justify-center">
