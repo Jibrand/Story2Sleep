@@ -1,29 +1,44 @@
 #root {
-    margin: 0 auto;
-    padding: 2rem;
-    text-align: center;
-  }
-  body{
-    margin: 0 auto;
-    padding: 2rem;
-    text-align: center; 
-  }
-  
-  p {
-    font-family: "Nunito Sans", sans-serif;
-    font-optical-sizing: auto;
-  }
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
 
-  .novel-paragraph::first-letter {
-    font-size: 3rem; /* Adjust the size as needed */
-    font-weight: bold;
-    float: left;
-    line-height: 1;
-    padding-right: 0.1em;
-  }
-  
-  
+body {
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+p {
+  font-family: "Nunito Sans", sans-serif;
+  font-optical-sizing: auto;
+}
+
+.novel-paragraph::first-letter {
+  font-size: 3rem;
+  /* Adjust the size as needed */
+  font-weight: bold;
+  float: left;
+  line-height: 1;
+  padding-right: 0.1em;
+}
+
+#nprogress .bar {
+  background: #29d;
+}
+
+/* Customize the spinner */
+#nprogress .spinner-icon {
+  border-top-color: #29d;
+  border-left-color: #29d;
+}
+
+/* Optional: Adjust the z-index to ensure it appears above other elements */
+#nprogress {
+  z-index: 9999 !important;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
- 

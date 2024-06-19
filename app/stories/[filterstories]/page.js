@@ -52,7 +52,7 @@ export default function Home(props) {
                                             <h2 className="card-title">{book.Title}</h2>
                                             <p>{book.Category}</p>
                                             <div className="card-actions">
-                                                <Link href={`/stories/${props.params.filterstories}/${book._id}`} className="btn btn-success">Hear Now!</Link>
+                                                <Link href={`/stories/${props.params.filterstories}/${book._id}`} className="btn btn-success">Listen</Link>
                                             </div>
                                         </div>
                                     </div>

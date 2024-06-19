@@ -1,5 +1,4 @@
 'use client'
-
 import Image from "next/image";
 import { useState, useRef, useEffect } from 'react';
 import { FaBackward, FaForward, FaPlay, FaPause } from 'react-icons/fa';
@@ -11,27 +10,24 @@ const Page = (props) => {
     const audioRef = useRef(null);
     const [selectedLanguage, setSelectedLanguage] = useState('en-US');
     const [selectedSpeaker, setSelectedSpeaker] = useState('default');
-    const [Book, setBook] = useState([])
+    const [Book, setBook] = useState([]);
     const [Loading, setLoading] = useState(true)
 
-
     useEffect(() => {
-        getBooks(props.params.filterstory)
-    }, [])
+        getBooks(props.params.filterstory);
+    }, []);
 
     const getBooks = async (id) => {
         let data = await fetch(`http://localhost:3000/api/Books/${props.params.filterstories}/${id}`);
         data = await data.json();
-
         if (data.success) {
-            setBook(data.result)
+            setBook(data.result);
+            setLoading(false);
+        } else {
+            return { success: false };
             setLoading(false);
         }
-        else {
-            return { success: false }
-            setLoading(false);
-        }
-    }
+    };
 
     const handlePlayPause = () => {
         const audio = audioRef.current;
@@ -69,14 +65,6 @@ const Page = (props) => {
         return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
     };
 
-    const handleLanguageChange = (event) => {
-        setSelectedLanguage(event.target.value);
-    };
-
-    const handleSpeakerChange = (event) => {
-        setSelectedSpeaker(event.target.value);
-    };
-
     useEffect(() => {
         const handleKeyDown = (event) => {
             if (event.code === 'Space') {
@@ -99,51 +87,38 @@ const Page = (props) => {
                     <Image src='/assests/book_emoji_reading.svg' className='h-8 w-8' alt="emoji" width={32} height={32} />
                 </span>
                 {Book.map((book, index) => (
-                    <p className="font-bold text-3xl text-center flex-grow">{book.Title}</p>
+                    <p className="font-bold text-3xl text-center flex-grow" key={index}>{book.Title}</p>
                 ))}
             </div>
-
-            {/* <div className="flex items-center justify-center gap-4 mb-4">
-                <label htmlFor="language" className="text-gray-500 font-medium mr-2">Language:</label>
-                <select className="select select-success w-full max-w-[10rem]">
-                    <option disabled selected>English</option>
-                    <option>Urdu</option>
-                    <option>Hindi</option>
-                    <option>Spanish</option>
-                </select>
-                <label htmlFor="speaker" className="text-gray-500 font-medium mr-2">Speaker:</label>
-                <select className="select select-success w-full max-w-[10rem]">
-                    <option disabled selected>Mark</option>
-                    <option>Grace</option>
-                    <option>Kim</option>
-                    <option>Jhon</option>
-                </select>
-            </div> */}
             {Loading ? (
                 <span className="loading loading-ring loading-lg mt-24"></span>
             ) : (
                 Book.map((book, index) => (
-
                     <div className="flex flex-col md:flex-row items-start" key={index}>
                         <div className="md:w-[20%] sm:block hidden">
-                            <Image src={book.Image} alt="Book" width={200} height={200} className=" lg:fixed   object-cover mb-4 rounded-xl" />
+                            <Image src={book.Image} alt="Book" width={200} height={200} className="lg:fixed object-cover mb-4 rounded-xl" />
                         </div>
                         <div className="md:w-3/4 p-4">
-                            <p className="text-gray-400 text-base mb-6 justify-start text-left text-lg novel-paragraph">
+                            <p className="text-gray-400   mb-6 justify-start text-left text-lg novel-paragraph">
                                 {book.Story}
                             </p>
                         </div>
                     </div>
                 ))
             )}
-
             <footer className="p-4 mt-8 mb-10">
                 <div className="flex items-center justify-center">
-                    <p className="text-gray-400 mr-2">Made with</p> <span className="text-gray-700 text-xl mr-2"> <Image src='/assests/book_emoji_reading.svg' className="h-6 w-6 rounded-full" alt="emoji" width={24} height={24} /> </span> <p className="text-gray-400 mr-2">by</p> <a href="https://www.linkedin.com/in/muhammad-jibran220/" target='_blank' rel='noopener noreferrer' className="text-green-400 font-bold underline mr-2">Jibran</a> <Image src='/assests/jibran.png' className="h-8 w-8 rounded-full" alt="Jibran" width={32} height={32} />
+                    <p className="text-gray-400 mr-2">Made with</p>
+                    <span className="text-gray-700 text-xl mr-2">
+                        <Image src='/assests/book_emoji_reading.svg' className="h-6 w-6 rounded-full" alt="emoji" width={24} height={24} />
+                    </span>
+                    <p className="text-gray-400 mr-2">by</p>
+                    <a href="https://www.linkedin.com/in/muhammad-jibran220/" target='_blank' rel='noopener noreferrer' className="text-green-400 font-bold underline mr-2">Jibran</a>
+                    <Image src='/assests/jibran.png' className="h-8 w-8 rounded-full" alt="Jibran" width={32} height={32} />
                 </div>
             </footer>
 
-            <div className="fixed bottom-0 left-0 right-0 bg-transparent backdrop-blur-sm text-white flex items-center justify-center px-4 py-5 shadow-lg">
+            <div className="fixed bottom-0 w-full bg-transparent backdrop-blur-sm text-white flex items-center justify-center px-4 py-5 shadow-lg container mx-auto rounded-lg">
                 <div className="flex items-center">
                     <button onClick={handleBackward} className="mx-2 text-white">
                         <FaBackward size={24} />
@@ -155,7 +130,7 @@ const Page = (props) => {
                         <FaForward size={24} />
                     </button>
                 </div>
-                <div className="flex-grow mx-4">
+                <div className="flex-grow mx-16">
                     <div className="flex justify-between text-xs mb-1">
                         <span>{formatTime(currentTime)}</span>
                         <span>{formatTime(duration)}</span>
@@ -165,7 +140,7 @@ const Page = (props) => {
                         value={currentTime}
                         max={duration}
                         onChange={(e) => (audioRef.current.currentTime = e.target.value)}
-                        className="w-full h-1 bg-gray-700 rounded-lg appearance-none cursor-pointer"
+                        className="w-full h-1 bg-gray-700 rounded-lg appearance-none cursor-pointer p"
                     />
                 </div>
             </div>
