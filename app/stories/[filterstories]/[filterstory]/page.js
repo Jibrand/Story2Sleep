@@ -124,7 +124,7 @@ const Page = (props) => {
             ) : (
                 Book.map((book, index) => (
 
-                    <div className="flex flex-col md:flex-row items-start">
+                    <div className="flex flex-col md:flex-row items-start" key={index}>
                         <div className="md:w-[20%] sm:block hidden">
                             <Image src={book.Image} alt="Book" width={200} height={200} className=" lg:fixed   object-cover mb-4 rounded-xl" />
                         </div>
