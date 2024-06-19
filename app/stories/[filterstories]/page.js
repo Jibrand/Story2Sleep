@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { Api } from "@/app/Api";
 
 export default function Home(props) {
 
@@ -14,7 +15,7 @@ export default function Home(props) {
     }, []);
 
     const getBooks = async (category) => {
-        let data = await fetch(`http://localhost:3000/api/Books/${category}`);
+        let data = await fetch(`${Api}/api/Books/${category}`);
         data = await data.json();
 
         if (data.success) {

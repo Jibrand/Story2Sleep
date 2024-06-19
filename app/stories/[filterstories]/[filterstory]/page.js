@@ -2,6 +2,7 @@
 import Image from "next/image";
 import { useState, useRef, useEffect } from 'react';
 import { FaBackward, FaForward, FaPlay, FaPause } from 'react-icons/fa';
+import { Api } from "@/app/Api";
 
 const Page = (props) => {
     const [isPlaying, setIsPlaying] = useState(false);
@@ -18,7 +19,7 @@ const Page = (props) => {
     }, []);
 
     const getBooks = async (id) => {
-        let data = await fetch(`http://localhost:3000/api/Books/${props.params.filterstories}/${id}`);
+        let data = await fetch(`${Api}/api/Books/${props.params.filterstories}/${id}`);
         data = await data.json();
         if (data.success) {
             setBook(data.result);
